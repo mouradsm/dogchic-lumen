@@ -28,7 +28,7 @@ class ClienteController extends Controller
 
         return $this->response->array([
          'data' =>  $clientes->toArray()
-        ]);
+        ], 200);
     }
 
     /**
@@ -60,7 +60,21 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        return \App\Cliente::findOrFail($id);
+        $cliente = \App\Cliente::with('animais')->find($id);
+
+        if(!$cliente){
+            return $this->response->array([
+               'error' => [
+                   'message' => 'Cliente não encontrado',
+               ]
+            ], 404);
+        }
+
+        return $this->response->array([
+            'data' => $cliente->toArray()
+        ], 200);
+
+
     }
 
     /**
