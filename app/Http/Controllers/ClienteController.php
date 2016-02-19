@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
 
 use App\Cliente as Cliente;
 
 class ClienteController extends Controller
 {
+    use Helpers;
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +22,13 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
 
-        return $clientes;
+
+        $clientes = Cliente::with('animais')->get();
+
+        return $this->response->array([
+         'data' =>  $clientes->toArray()
+        ]);
     }
 
     /**

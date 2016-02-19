@@ -11,6 +11,8 @@
 |
 */
 
+app('Dingo\Api\Transformer\Factory')->register('Cliente','ClienteTransformer');
+
 $app->get('/', function () use ($app) {
     return $app->version();
 });
@@ -18,5 +20,8 @@ $app->get('/', function () use ($app) {
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function($api){
-    $api->get('clientes','App\Http\Controllers\ClienteController@index' );
+    $api->get('clientes',['as' => 'clientes.index', 'uses' => 'App\Http\Controllers\ClienteController@index']);
+    $api->get('animais',['as' => 'animais.index', 'uses' => 'App\Http\Controllers\AnimalController@index']);
 });
+
+/*app('Dingo\Api\Routing\UrlGenerator')->version('v1')->route('clientes.index');*/
