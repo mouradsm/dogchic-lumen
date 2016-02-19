@@ -18,7 +18,7 @@ class TestCase extends Laravel\Lumen\Testing\TestCase implements \Lukasoppermann
         parent::setUp();
 
         $this->client = new GuzzleHttp\Client([
-            'base_uri' => 'http://localhost:8000',
+            'base_uri' => 'http://localhost:8000/api',
             'exceptions' => false,
         ]);
     }

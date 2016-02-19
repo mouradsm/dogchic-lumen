@@ -1,12 +1,17 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: diego
- * Date: 19/02/16
- * Time: 19:45
- */
-class AnimalTest
+
+class AnimalTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function check_animal_url(){
+        $response = $this->client->get('api/animais');
+
+        $this->assertEquals(self::HTTP_OK, $response->getStatusCode());
+
+    }
+
 
 }
