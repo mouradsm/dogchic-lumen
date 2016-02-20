@@ -17,6 +17,7 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('nome');
+            $table->boolean('ativo');
 
         });
     }
