@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Transformers\ClientTransformer;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,7 @@ class ClienteController extends Controller
 
         $clientes = Cliente::with('animais')->get();
 
-        return $this->response->array([
-         'data' =>  $clientes->toArray()
-        ], 200);
+        return $this->response->collection($clientes, new ClientTransformer());
     }
 
     /**
@@ -60,7 +59,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $cliente = \App\Cliente::with('animais')->find($id);
+        $cliente = Cliente::with('animais')->findOrFail($id);
 
         if(!$cliente){
             return $this->response->array([
@@ -70,10 +69,11 @@ class ClienteController extends Controller
             ], 404);
         }
 
-        return $this->response->array([
+        /*return $this->response->array([
             'data' => $cliente->toArray()
-        ], 200);
+        ], 200);*/
 
+        return $this->response->item($cliente, new ClientTransformer);
 
     }
 

@@ -6,10 +6,21 @@
  * Time: 22:12
  */
 
-namespace app\Transformers;
+namespace App\Transformers;
+
+use League\Fractal\TransformerAbstract;
+use App\Animal;
 
 
-class AnimalTransformer
+class AnimalTransformer extends TransformerAbstract
 {
-
+    //TODO Escrever este transformer direito
+    public function transform(Animal $animal)
+    {
+        return [
+            'nome'  => $animal->nome,
+            'raca'  => $animal->raca,
+            'porte' => $animal->porte,
+        ];
+    }
 }

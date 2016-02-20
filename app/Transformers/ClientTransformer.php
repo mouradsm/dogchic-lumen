@@ -6,10 +6,21 @@
  * Time: 21:59
  */
 
-namespace app\Transformers;
+namespace App\Transformers;
 
+use App\Cliente;
+use League\Fractal\TransformerAbstract;
 
-class ClientTransformer
+class ClientTransformer extends TransformerAbstract
 {
+    public function transform(Cliente $cliente)
+    {
+        return [
+
+            'id'    => (int)$cliente->id,
+            'nome'  => $cliente->nome,
+            'animais' => $cliente->animais->toArray()
+        ];
+    }
 
 }
