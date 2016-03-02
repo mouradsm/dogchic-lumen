@@ -98,6 +98,8 @@ class ClienteController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+       $cliente->delete();
     }
 }
