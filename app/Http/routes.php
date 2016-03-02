@@ -13,15 +13,15 @@
 
 app('Dingo\Api\Transformer\Factory')->register('Cliente','ClienteTransformer');
 
-$app->get('/', function () use ($app) {
+/*$app->get('/', function () use ($app) {
     return $app->version();
-});
+});*/
 
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function($api){
     $api->get('clientes',['as' => 'clientes.index', 'uses' => 'App\Http\Controllers\ClienteController@index']);
-    $api->get('cliente/{id}',['as' => 'clientes.show', 'uses' => 'App\Http\Controllers\ClienteController@show']);
+    $api->get('clientes/{id}', ['as' => 'clientes.show', 'uses' => 'App\Http\Controllers\ClienteController@show']);
 
     $api->get('animais',['as' => 'animais.index', 'uses' => 'App\Http\Controllers\AnimalController@index']);
 });

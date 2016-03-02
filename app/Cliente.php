@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     public $timestamps = false;
+    public $fillable = ['nome','ativo'];
 
     public function animais()
     {

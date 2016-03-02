@@ -6,9 +6,6 @@ use App\Transformers\ClientTransformer;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use Dingo\Api\Routing\Helpers;
-
 use App\Cliente as Cliente;
 
 class ClienteController extends BaseController
@@ -61,15 +58,13 @@ class ClienteController extends BaseController
      */
     public function show($id)
     {
-        $cliente = Cliente::with('animais')->findOrFail($id);
+        $cliente = Cliente::with('animais')->find($id);
 
         if(! $cliente){
             $this->response->errorNotFound('Cliente não encontrado');
         }
 
-
         return $this->response->item($cliente, new ClientTransformer);
-
     }
 
     /**
