@@ -22,6 +22,9 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function($api){
     $api->get('clientes',['as' => 'clientes.index', 'uses' => 'App\Http\Controllers\ClienteController@index']);
     $api->get('clientes/{id}', ['as' => 'clientes.show', 'uses' => 'App\Http\Controllers\ClienteController@show']);
+    $api->post('clientes',['as' => 'clientes.store', 'uses' => 'App\Http\Controllers\ClienteController@store']);
+    $api->put('clientes/{id}',['as' => 'clientes.update', 'uses' => '\App\Http\Controllers\ClienteController@update']);
+    $api->delete('clientes/{id}',['as' => 'clientes.delete', 'uses' => '\App\Http\Controllers\ClienteController@delete']);
 
     $api->get('animais',['as' => 'animais.index', 'uses' => 'App\Http\Controllers\AnimalController@index']);
 });
