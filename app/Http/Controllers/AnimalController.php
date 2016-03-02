@@ -11,10 +11,8 @@ use App\Http\Controllers\Controller;
 
 use App\Animal as Animals;
 
-class AnimalController extends Controller
+class AnimalController extends BaseController
 {
-    use Helpers;
-
     /**
      * Display a listing of the resource.
      *

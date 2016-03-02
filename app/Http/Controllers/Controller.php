@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Dingo\Api\Routing\Helpers;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 
-class Controller extends BaseController
+class BaseController extends Controller
 {
-
+    use Helpers;
 
 }

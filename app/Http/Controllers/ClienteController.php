@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
 
 use App\Cliente as Cliente;
 
-class ClienteController extends Controller
+class ClienteController extends BaseController
 {
-    use Helpers;
-
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +23,11 @@ class ClienteController extends Controller
 
 
         $clientes = Cliente::with('animais')->get();
+
+        if(! $clientes)
+        {
+            $this->response->errorNotFound('Não existe cliente cadastrado!');
+        }
 
         return $this->response->collection($clientes, new ClientTransformer());
     }
@@ -61,17 +63,10 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::with('animais')->findOrFail($id);
 
-        if(!$cliente){
-            return $this->response->array([
-               'error' => [
-                   'message' => 'Cliente não encontrado',
-               ]
-            ], 404);
+        if(! $cliente){
+            $this->response->errorNotFound('Cliente não encontrado');
         }
 
-        /*return $this->response->array([
-            'data' => $cliente->toArray()
-        ], 200);*/
 
         return $this->response->item($cliente, new ClientTransformer);
 
