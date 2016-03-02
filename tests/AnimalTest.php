@@ -1,7 +1,7 @@
 <?php
 
 
-class AnimalTest extends TestCase
+class AnimalTest extends ApiTester
 {
     /**
      * @test

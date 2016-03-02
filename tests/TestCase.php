@@ -2,7 +2,7 @@
 
 class TestCase extends Laravel\Lumen\Testing\TestCase implements \Lukasoppermann\Httpstatus\Httpstatuscodes
 {
-    protected $client;
+
 
     /**
      * Creates the application.
@@ -17,13 +17,6 @@ class TestCase extends Laravel\Lumen\Testing\TestCase implements \Lukasoppermann
     public function setUp(){
         parent::setUp();
 
-        $this->client = new GuzzleHttp\Client([
-            'base_uri' => 'http://localhost:8000/api',
-            'exceptions' => false,
-        ]);
+
     }
-
-
-
-
 }
