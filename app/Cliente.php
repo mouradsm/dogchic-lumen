@@ -18,4 +18,14 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Endereco');
     }
+
+    protected static function  boot()
+    {
+        parent::boot();
+
+        static::deleting(function($cliente){
+            $cliente->animais()->delete();
+            $cliente->endereco()->delete();
+        });
+    }
 }
