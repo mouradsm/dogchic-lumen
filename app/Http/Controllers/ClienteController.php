@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Transformers\AnimalTransformer;
 use App\Transformers\ClientTransformer;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ClienteController extends BaseController
     {
 
 
-        $clientes = Cliente::with('animais')->get();
+        $clientes = Cliente::all();
 
         if(! $clientes)
         {
@@ -58,13 +59,29 @@ class ClienteController extends BaseController
      */
     public function show($id)
     {
-        $cliente = Cliente::with('animais')->find($id);
+        $cliente = Cliente::find($id);
 
         if(! $cliente){
             $this->response->errorNotFound('Cliente não encontrado');
         }
 
-        return $this->response->item($cliente, new ClientTransformer);
+        return $this->response->item($cliente, new ClientTransformer());
+    }
+
+    public function showAnimais($cliente_id) {
+
+        $animais = Cliente::find($cliente_id)->animais;
+
+        if(! $animais) {
+            $this->response->errorNotFound('Animais não encontrados');
+        }
+
+        return  $this->response->collection($animais, new AnimalTransformer());
+
+
+
+
+
     }
 
     /**

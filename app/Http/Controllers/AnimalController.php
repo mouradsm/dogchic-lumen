@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Transformers\AnimalTransformer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,7 +23,13 @@ class AnimalController extends BaseController
     {
         $animais = Animal::all();
 
-        return $animais;
+        if(! $animais)
+        {
+            $this->response->errorNotFound('Animais não encontrados');
+        }
+
+
+        return $this->response->collection($animais, new AnimalTransformer());;
     }
 
     /**
@@ -54,7 +61,14 @@ class AnimalController extends BaseController
      */
     public function show($id)
     {
-        return \App\Animal::findOrFail($id);
+
+        $animal = \App\Animal::find($id);
+
+        if(! $animal){
+            $this->response->errorNotFound('Animal não encontrado');
+        }
+
+        return $this->response->item($animal, new AnimalTransformer());
     }
 
     /**

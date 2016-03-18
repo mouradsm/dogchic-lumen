@@ -19,7 +19,7 @@ class ClientTransformer extends TransformerAbstract
 
             'id'    => (int)$cliente->id,
             'nome'  => $cliente->nome,
-            'animais' => $cliente->animais->toArray()
+           /* 'animais' => $cliente->animais->toArray()*/
         ];
     }
 

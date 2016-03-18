@@ -18,9 +18,14 @@ class AnimalTransformer extends TransformerAbstract
     public function transform(Animal $animal)
     {
         return [
-            'nome'  => $animal->nome,
-            'raca'  => $animal->raca,
-            'porte' => $animal->porte,
+            'id'        => $animal->id,
+            'nome'      => $animal->nome,
+            'raca'      => $animal->raca,
+            'porte'     => $animal->porte,
+            'cor'       => $animal->cor,
+            'idade'     => $animal->idade,
+            'obs'       => $animal->obs,
+            'cliente'   => $animal->cliente_id
         ];
     }
 }
