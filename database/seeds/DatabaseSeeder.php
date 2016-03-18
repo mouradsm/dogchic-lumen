@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->disableForeignKeyCheck();
         Model::unguard();
 
         /*$this->call(UsersTableSeeder::class);
@@ -20,5 +21,37 @@ class DatabaseSeeder extends Seeder
         $this->call(ClienteTableSeeder::class);
 
         Model::reguard();
+        $this->enableForeignKeyCheck();
     }
+
+    protected function disableForeignKeyCheck(){
+        $connection = config('database.connections')[config('database.default')];
+        $sql='';
+        switch ($connection['driver']) {
+            case 'mysql':
+                $sql='SET FOREIGN_KEY_CHECKS = 0';
+                break;
+            case 'sqlite':
+                $sql='PRAGMA foreign_keys = OFF';
+                break;
+        }
+
+        DB::statement($sql);
+    }
+
+    protected function enableForeignKeyCheck(){
+        $connection = config('database.connections')[config('database.default')];
+        $sql='';
+        switch ($connection['driver']) {
+            case 'mysql':
+                $sql='SET FOREIGN_KEY_CHECKS = 1';
+                break;
+            case 'sqlite':
+                $sql='PRAGMA foreign_keys = ON';
+                break;
+        }
+
+        DB::statement($sql);
+    }
+
 }

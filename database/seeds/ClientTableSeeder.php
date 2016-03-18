@@ -9,11 +9,13 @@ class ClienteTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        /*DB::statement('SET FOREIGN_KEY_CHECKS=0;');*/
+        /*DB::statement('PRAGMA foreign_keys = OFF');*/
         DB::table('clientes')->truncate();
         DB::table('animals')->truncate();
         DB::table('enderecos')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        /*DB::statement('PRAGMA foreign_keys = ON');*/
+        /*DB::statement('SET FOREIGN_KEY_CHECKS=1;');*/
         factory('App\Cliente', 10)->create()->each(function(App\Cliente $client) {
             factory('App\Animal',rand(1,5))->create(['cliente_id' => $client->id]);
             factory('App\Endereco')->create(['cliente_id' => $client->id]);
