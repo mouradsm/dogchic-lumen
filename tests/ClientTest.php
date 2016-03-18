@@ -13,7 +13,7 @@ class ClientTest extends ApiTester
     public function busca_clientes()
     {
 
-        $this->makeClient();
+//        $this->makeClient();
 
         $response = $this->client->get('api/clientes');
 
@@ -26,7 +26,7 @@ class ClientTest extends ApiTester
      */
     public function busca_unico_cliente()
     {
-        $this->makeClient();
+        /*$this->makeClient();*/
 
         $response = $this->client->get('api/clientes/1');
 
